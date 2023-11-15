@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FishEye</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="dist/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <a class="header__link" href="/" title="Revenir à l'accueil">
+      <img class="header__logo" src="assets/images/logo.png" width="200" height="50" alt="FishEye Home Page" />
+    </a>
+  </header>
+  <main id="photographer-wrapper">
+    <section class="photographer-infos">
+      <div class="photographer-infos__header" tabindex="0">
+        <h1 class="photographer-infos__name"></h1>
+        <p class="photographer-infos__location"></p>
+        <p class="photographer-infos__tagline"></p>
+      </div>
+      <div class="photographer-infos__contact">
+        <button class="button" data-target="#contact-form-modal" aria-label="Contactez-moi">Contactez-moi</button>
+      </div>
+      <img class="photographer-infos__image" tabindex="0" />
+    </section>
+
+    <section class="photographer-medias">
+      <!-- Custom select FIlters -->
+      <form class="photographer-medias__filters">
+        <label for="sortBy">Trier par</label>
+        <select name="sortBy" id="sortBy">
+          <option value="popularity">Popularité</option>
+          <option value="date">Date</option>
+          <option value="title">Titre</option>
+        </select>
+      </form>
+      <div class="photographer-medias__gallery"></div>
+    </section>
+
+    <aside class="photographer-aside">
+      <div class="photographer-aside__likes">
+        <span class="count"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 19" fill="currentColor">
+          <path
+            d="M9.125 18.35L7.85625 17.03C3.35 12.36 0.375 9.28 0.375 5.5C0.375 2.42 2.4925 0 5.1875 0C6.71 0 8.17125 0.81 9.125 2.09C10.0787 0.81 11.54 0 13.0625 0C15.7575 0 17.875 2.42 17.875 5.5C17.875 9.28 14.9 12.36 10.3938 17.04L9.125 18.35Z" />
+        </svg>
+      </div>
+      <div class="photographer-aside__price">
+        <span class="count"></span>
+      </div>
+    </aside>
+
+    <!-- Lightbox -->
+    <dialog class="lightbox">
+      <div class="lightbox__content"></div>
+      <!-- Ligthbox prev/next -->
+      <button class="lightbox__prev">Précedent</button>
+      <button class="lightbox__next">Suivant</button>
+      <!-- close button -->
+      <button class="lightbox__close" data-dismiss>&times;</button>
+    </dialog>
+
+    <!-- Contact Form -->
+    <dialog class="photographer-contact" id="contact-form-modal">
+      <h2 tabindex="0">Contactez-moi <span class="photographer-contact__name"></span></h2>
+      <form class="photographer-contact__form" method="dialog">
+        <div class="input-group">
+          <label for="firstname">Prénom</label>
+          <input type="text" id="firstname" name="firstname" placeholder="John" />
+        </div>
+        <div class="input-group">
+          <label for="lastname">Nom</label>
+          <input type="text" name="lastname" id="lastname" placeholder="Doe">
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="john@doe.com">
+        </div>
+        <div class="input-group">
+          <label for="message">Votre message</label>
+          <textarea name="message" id="message" cols="30" rows="10" placeholder="Un petit doux..."></textarea>
+        </div>
+        <button class="button" type="submit">envoyer</button>
+        <button class="close" data-dismiss>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 42 42" fill="none">
+            <path
+              d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z"
+              fill="white" />
+          </svg>
+        </button>
+      </form>
+    </dialog>
+  </main>
+  <footer class="footer">
+    <p>© 2021 Fisheye, OpenClassrooms project — Tous droits réservés.</p>
+  </footer>
+
+  <!-- Templates -->
+  <template id="media-image-template">
+    <article class="media-card">
+      <a class="media-card__link" href="">
+        <figure class="media-card__media">
+          <img class="media-card__image" src="" alt="">
+        </figure>
+      </a>
+      <div class="media-card__infos">
+        <h2 class="media-card__title" tabindex="0"></h2>
+        <button class="media-card__likes">
+          <span class="count"></span>
+          <svg class="icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            aria-label="likes">
+            <path
+              d="M10.9643 21.5637L10.9629 21.5623C7.85424 18.4899 5.35065 16.0131 3.61233 13.6968C1.88736 11.3982 1 9.36402 1 7.19346C1 3.63461 3.5356 1 6.6 1C8.35163 1 10.0752 1.89421 11.212 3.34919L12 4.35775L12.788 3.34919C13.9248 1.89421 15.6484 1 17.4 1C20.4644 1 23 3.63461 23 7.19346C23 9.36402 22.1126 11.3983 20.3875 13.6987C18.6492 16.0166 16.1459 18.4963 13.0375 21.575C13.0371 21.5754 13.0367 21.5758 13.0363 21.5762L12.0027 22.5939L10.9643 21.5637Z"
+              stroke="currentColor" stroke-width="2" />
+          </svg>
+        </button>
+      </div>
+    </article>
+  </template>
+
+  <template id="media-video-template">
+    <article class="media-card" data-type="video">
+      <a class="media-card__link" href="" tabindex="0">
+        <figure class="media-card__media">
+          <video class="media-card__video" preload="metadata" style="pointer-events: none;">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4#t=0.1" type="video/mp4">
+          </video>
+          <svg width="100" height="100" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 18L13 26.6603L13 9.33975L28 18Z" fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M18 34C26.8366 34 34 26.8366 34 18C34 9.16344 26.8366 2 18 2C9.16344 2 2 9.16344 2 18C2 26.8366 9.16344 34 18 34ZM18 36C27.9411 36 36 27.9411 36 18C36 8.05887 27.9411 0 18 0C8.05887 0 0 8.05887 0 18C0 27.9411 8.05887 36 18 36Z"
+              fill="white" />
+          </svg>
+        </figure>
+      </a>
+      <div class="media-card__infos">
+        <h2 class="media-card__title" tabindex="0"></h2>
+        <button class="media-card__likes">
+          <span class="count"></span>
+          <svg class="icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            aria-label="likes">
+            <path
+              d="M10.9643 21.5637L10.9629 21.5623C7.85424 18.4899 5.35065 16.0131 3.61233 13.6968C1.88736 11.3982 1 9.36402 1 7.19346C1 3.63461 3.5356 1 6.6 1C8.35163 1 10.0752 1.89421 11.212 3.34919L12 4.35775L12.788 3.34919C13.9248 1.89421 15.6484 1 17.4 1C20.4644 1 23 3.63461 23 7.19346C23 9.36402 22.1126 11.3983 20.3875 13.6987C18.6492 16.0166 16.1459 18.4963 13.0375 21.575C13.0371 21.5754 13.0367 21.5758 13.0363 21.5762L12.0027 22.5939L10.9643 21.5637Z"
+              stroke="currentColor" stroke-width="2" />
+          </svg>
+        </button>
+      </div>
+    </article>
+  </template>
+
+  <!-- Scripts -->
+  <script type="module" src="scripts/pages/photographer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FishEye</title>
+  <meta name="description" content="Projet 6 OpenClassrooms, plateforme de photographes">
+  <link rel="stylesheet" href="dist/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <a class="header__link" href="/" title="Revenir à l'accueil">
+      <img class="header__logo" src="assets/images/logo.png" width="200" height="50" alt="FishEye Home Page" />
+    </a>
+    <h1 class="header__title" tabindex="0">Nos photographes</h1>
+  </header>
+  <main class="photographers-list" id="photographers-wrapper"></main>
+  <footer class="footer">
+    <p>© 2021 Fisheye, OpenClassrooms project — Tous droits réservés.</p>
+  </footer>
+
+  <template id="photographer-card-template">
+    <article class="photographer-card">
+      <a class="photographer-card__link">
+        <figure class="photographer-card__media">
+          <img class="photographer-card__image" alt="" />
+        </figure>
+        <h2 class="photographer-card__name"></h2>
+      </a>
+      <div class="photographer-card__content" tabindex="0">
+        <p class="photographer-card__location"></p>
+        <p class="photographer-card__tagline"></p>
+        <p class="photographer-card__price"></p>
+      </div>
+    </article>
+  </template>
+
+  <script type="module" src="scripts/pages/home.js"></script>
+</body>
+
+</html>
