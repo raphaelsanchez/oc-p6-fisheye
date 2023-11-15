@@ -1,0 +1,34 @@
+:root {
+  /* Colors */
+  --clr-primary: #901c1c;
+  --clr-primary-contrast: #fff;
+
+  --clr-secondary: #d46a52;
+  --clr-secondary-contrast: #000;
+
+  --clr-neutral-900: #000;
+  --clr-neutral-600: #525252;
+  --clr-neutral-400: #757575;
+  --clr-neutral-200: #fafafa;
+  --clr-neutral-100: #fff;
+
+  /* Semantique colors */
+  --outline-color: var(--clr-secondary);
+}
+
+:root {
+  /* Layout */
+  --container-max-width: 90rem;
+  --container-max-width-sm: 60rem;
+
+  /* Gap */
+  --gap: 1rem;
+
+  /* Radius */
+  --radius: 0.25rem;
+
+  /* Elevation */
+  --shadow-color: ;
+  --elevation-100: 0px 4px 16px rgba(0, 0, 0, 0.5);
+  --elevation-200: 0px 8px 24px rgba(0, 0, 0, 0.35);
+}

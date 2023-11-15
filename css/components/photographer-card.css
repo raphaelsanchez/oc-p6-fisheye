@@ -1,0 +1,56 @@
+/* Photographer Card */
+.photographer-card {
+  display: grid;
+  gap: var(--gap);
+}
+
+.photographer-card__link {
+  display: flex;
+  gap: var(--gap);
+  flex-direction: column;
+  align-items: center;
+}
+
+.photographer-card__name {
+  color: var(--clr-secondary);
+  font-size: 2.25rem;
+  font-weight: 400;
+}
+
+.photographer-card__media {
+  width: 200px;
+  aspect-ratio: 1;
+  border-radius: 100vmax;
+  overflow: hidden;
+  background-image: var(--background-image);
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
+
+.photographer-card__image {
+  width: 100%;
+  object-fit: cover;
+  opacity: 0;
+  /* transition: opacity 150ms ease-in-out; */
+}
+
+.photographer-card__image.loaded {
+  opacity: 1;
+}
+
+.photographer-card__content {
+  display: flex;
+  gap: 0.2rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photographer-card__location {
+  color: var(--clr-primary);
+  font-size: 1.25rem;
+}
+
+.photographer-card__price {
+  color: var(--clr-neutral-400);
+}

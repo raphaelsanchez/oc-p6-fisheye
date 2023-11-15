@@ -1,0 +1,149 @@
+/* Photographer infos */
+.photographer-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding-inline: 2.62rem;
+  background-color: var(--clr-neutral-200);
+}
+
+.photographer-infos__header {
+  display: flex;
+  gap: var(--gap);
+  flex-direction: column;
+  justify-content: center;
+}
+
+.photographer-infos__image {
+  width: 200px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 100vmax;
+}
+
+.photographer-infos__name {
+  color: var(--clr-secondary);
+  font-size: clamp(2.25rem, 8vw, 4rem);
+  font-weight: 400;
+}
+
+.photographer-infos__location {
+  color: var(--clr-primary);
+  font-size: clamp(1.25rem, 8vw, 1.5rem);
+}
+
+.photographer-infos__tagline {
+  color: var(--clr-neutral-600);
+  font-size: clamp(1rem, 8vw, 1.125rem);
+}
+
+.photographer-contact {
+  --outline-color: var(--clr-primary);
+  width: min(100%, 40rem);
+  background-color: var(--clr-secondary);
+  border: none;
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--elevation-200);
+}
+
+.photographer-contact::backdrop {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.photographer-contact .close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.photographer-contact h2 {
+  display: grid;
+  color: var(--clr-neutral-900);
+  font-size: 4rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.photographer-aside {
+  position: sticky;
+  bottom: 0;
+
+  display: flex;
+  gap: var(--gap);
+  padding: 1rem;
+  width: max-content;
+  max-width: 100%;
+  margin-left: auto;
+  transform: translateY(0.25rem);
+  border-radius: var(--radius);
+  background-color: var(--clr-secondary);
+  color: var(--clr-neutral-900);
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+/* Medias */
+.photographer-medias__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 4rem;
+  padding-block: 2.62rem;
+}
+
+/* Filters */
+.photographer-medias__filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.photographer-medias__filters select {
+  border-radius: var(--radius);
+  padding-inline: 0.5rem 2rem;
+  padding-block: 0.5rem;
+  background: var(--clr-primary);
+  color: var(--clr-neutral-100);
+  appearance: none;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPG1hc2sgaWQ9Im1hc2swXzNfNSIgc3R5bGU9Im1hc2stdHlwZTpsdW1pbmFuY2UiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjAiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiI+CjxwYXRoIGQ9Ik0zMiAyLjc5NzUzZS0wNkwxLjkwNzM1ZS0wNiAwTC04LjkwMThlLTA3IDMyTDMyIDMyTDMyIDIuNzk3NTNlLTA2WiIgZmlsbD0id2hpdGUiLz4KPC9tYXNrPgo8ZyBtYXNrPSJ1cmwoI21hc2swXzNfNSkiPgo8cGF0aCBkPSJNMjIuMTIgMTEuNDUzNEwxNiAxNy41Nkw5Ljg4IDExLjQ1MzRMOCAxMy4zMzM0TDE2IDIxLjMzMzRMMjQgMTMuMzMzNEwyMi4xMiAxMS40NTM0WiIgZmlsbD0id2hpdGUiLz4KPC9nPgo8L3N2Zz4K);
+  background-repeat: no-repeat;
+  background-position: right;
+  border: none;
+}
+
+.photographer-medias__filters select::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 3px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #333;
+}
+
+/* Aside */
+.photographer-aside__price {
+  display: flex;
+  align-items: center;
+}
+
+@media (width > 40rem) {
+  .photographer-infos {
+    flex-direction: row;
+  }
+
+  .photographer-infos__contact {
+    place-self: center;
+  }
+
+  .photographer-infos__image {
+    place-self: center end;
+  }
+}

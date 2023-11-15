@@ -1,0 +1,24 @@
+/* Buttons */
+.button {
+  border-radius: var(--radius);
+  padding-block: 1.31rem;
+  padding-inline: 0.69rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  background-color: var(--clr-primary);
+  color: var(--clr-primary-contrast);
+  border: none;
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+}
+
+.button:hover {
+  background-color: var(--clr-secondary);
+  color: var(--clr-secondary-contrast);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--outline-color);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}

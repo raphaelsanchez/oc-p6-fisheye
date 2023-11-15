@@ -1,0 +1,17 @@
+/* Header */
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header__logo {
+  height: 3.125rem;
+  vertical-align: middle;
+}
+
+.header__title {
+  color: var(--clr-primary);
+}

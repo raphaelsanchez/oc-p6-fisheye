@@ -1,0 +1,6 @@
+.photographers-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 4rem;
+  padding-block: 4rem;
+}

@@ -1,0 +1,65 @@
+.lightbox {
+  background: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  opacity: 1;
+  height: 100vh;
+  width: 100vw;
+  border: none;
+}
+
+.lightbox::backdrop {
+  background: rgba(255, 255, 255, 1);
+}
+
+.lightbox.fadeOut {
+  opacity: 0;
+}
+
+.lightbox__loader {
+  width: 38px;
+  height: 38px;
+  background: url("../../assets/images/loader.svg") center no-repeat;
+}
+
+.lightbox__prev,
+.lightbox__next {
+  border: none;
+  position: fixed;
+  background: url("../../assets/images/chevron.svg") center center / 100% 100% no-repeat transparent;
+  width: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1%;
+  text-indent: -100vw;
+  overflow: hidden;
+}
+
+.lightbox__next {
+  transform: rotate(180deg);
+  right: 1%;
+  left: auto;
+}
+
+.lightbox__close {
+  border: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 1%;
+  width: 2rem;
+  height: 2rem;
+  text-indent: -9999px;
+  background: url("../../assets/images/close.svg") center center / 100% 100% no-repeat transparent;
+}
+
+.lightbox__content {
+  margin: auto;
+  max-width: 90%;
+}
+
+.lightbox__content img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: auto;
+}

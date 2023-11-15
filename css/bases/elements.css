@@ -1,0 +1,26 @@
+:focus-visible {
+  outline: 2px solid var(--outline-color);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  accent-color: var(--clr-primary);
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+header,
+main,
+section,
+footer {
+  width: min(90vw, var(--container-max-width));
+  margin-inline: auto;
+  padding-block: 2.62rem;
+}
