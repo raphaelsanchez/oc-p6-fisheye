@@ -61,6 +61,7 @@ const renderHeader = async (photographer) => {
 }
 
 // Function to render photographer gallery !
+// TODO: (maybe) refactor this function
 const renderGallery = async (photographerMedias) => {
   const mediaSection = document.querySelector(".photographer-medias__gallery")
   const selectElement = document.querySelector("#sortBy")
@@ -89,7 +90,12 @@ const renderGallery = async (photographerMedias) => {
       case "Escape":
         lightbox.close()
         break
-      // can add more keyboard shortcuts here 👇
+      case "ArrowLeft":
+        lightbox.previous()
+        break
+      case "ArrowRight":
+        lightbox.next()
+        break
     }
   })
 
