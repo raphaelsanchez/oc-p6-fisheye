@@ -11,20 +11,18 @@ export class Lightbox {
   open(index) {
     this.currentIndex = index
     this.updateDisplay()
-    // Open the lightbox <dialog>
     this.lightboxElement.showModal()
-    // prevent scrolling
-    document.body.style.overflow = "hidden"
+    document.body.classList.add("prevent-scroll")
   }
 
   close() {
     this.lightboxElement.close()
-    // remove body style
-    document.body.removeAttribute("style")
+    document.body.classList.remove("prevent-scroll")
   }
 
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.mediaArray.length
+    // this.currentIndex = this.currentIndex + 1 > this.mediaArray.length ? 0 : this.currentIndex + 1
     this.updateDisplay()
   }
 
