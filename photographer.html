@@ -59,13 +59,13 @@
     </aside>
 
     <!-- Lightbox -->
-    <dialog class="lightbox">
+    <dialog class="lightbox" aria-label="Vue agrandi">
       <div class="lightbox__content"></div>
       <!-- Ligthbox prev/next -->
-      <button class="lightbox__prev">Précedent</button>
-      <button class="lightbox__next">Suivant</button>
+      <button class="lightbox__prev">Image précédente</button>
+      <button class="lightbox__next">Image suivante</button>
       <!-- close button -->
-      <button class="lightbox__close" data-dismiss>&times;</button>
+      <button class="lightbox__close" data-dismiss>Fermer la boite de dialog</button>
     </dialog>
 
     <!-- Contact Form -->
@@ -106,7 +106,7 @@
   <!-- Templates -->
   <template id="media-image-template">
     <article class="media-card">
-      <a class="media-card__link" href="">
+      <a class="media-card__link" href="" aria-label="vue rapprochée de l'image">
         <figure class="media-card__media">
           <img class="media-card__image" src="" alt="">
         </figure>
@@ -128,7 +128,7 @@
 
   <template id="media-video-template">
     <article class="media-card" data-type="video">
-      <a class="media-card__link" href="" tabindex="0">
+      <a class="media-card__link" href="" tabindex="0" aria-label="jouer la video en vue rapprochée">
         <figure class="media-card__media">
           <video class="media-card__video" preload="metadata" style="pointer-events: none;">
             <source src="https://www.w3schools.com/html/mov_bbb.mp4#t=0.1" type="video/mp4">

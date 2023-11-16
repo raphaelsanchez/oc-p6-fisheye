@@ -50,6 +50,9 @@ export class Lightbox {
     mediaTitle.classList.add("lightbox__title")
     mediaTitle.textContent = currentMedia.title
 
+    mediaElement.setAttribute("tabindex", "0")
+    mediaTitle.setAttribute("tabindex", "0")
+
     // Ajouter le média à la lightbox
     this.contentElement.appendChild(mediaElement)
     this.contentElement.appendChild(mediaTitle)
