@@ -1,10 +1,17 @@
 .lightbox {
+  place-content: center;
   background: rgba(255, 255, 255, 0.9);
   text-align: center;
-  opacity: 1;
+  opacity: 0;
   height: 100vh;
   width: 100vw;
   border: none;
+}
+
+.lightbox[open] {
+  display: grid;
+  opacity: 1;
+  z-index: 100;
 }
 
 .lightbox::backdrop {
@@ -53,13 +60,21 @@
 }
 
 .lightbox__content {
+  --tailleDuTitre: 5vh;
   margin: auto;
   max-width: 90%;
+  display: grid;
+  gap: 1rem;
 }
 
 .lightbox__content img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  margin: auto;
+  max-height: calc(100vh - var(--tailleDuTitre));
+  width: auto;
+  height: auto;
+}
+.lightbox__title {
+  height: var(--tailleDuTitre);
+  text-align: start;
+  font-weight: 400;
+  color: var(--clr-primary);
 }
