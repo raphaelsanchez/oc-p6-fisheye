@@ -191,6 +191,24 @@ const attachModalHandlers = (photographer) => {
   })
 }
 
+// Form event handler
+const attachFormHandlers = (photographer) => {
+  const form = document.querySelector(".photographer-contact__form")
+  form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    // log form submission date and time
+    const date = new Date()
+    console.log(
+      `Form submitted for ${photographer.name} on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`,
+    )
+    // log all form data
+    const formData = new FormData(form)
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`)
+    }
+  })
+}
+
 // Get data and render page when DOM is loaded
 window.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -203,6 +221,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     renderPhotographer(photographer, media)
     attachModalHandlers(photographer)
+    attachFormHandlers(photographer)
   } catch (error) {
     console.error("An error occurred:", error)
   }
