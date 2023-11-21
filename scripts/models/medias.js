@@ -1,24 +1,22 @@
 // eslint-disable-next-line no-unused-vars
 export class Medias {
   createMedia(photographerDataMediaById, photographerDataById) {
-    //? Vérifier si le media est une image
-    // eslint-disable-next-line no-prototype-builtins
-    if (photographerDataMediaById.hasOwnProperty("image")) {
+    // Vérifier si le media est une image
+    if (Object.prototype.hasOwnProperty.call(photographerDataMediaById, "image")) {
       return new ImageMedia(photographerDataMediaById, photographerDataById)
-      //? Si ce n'est pas une image, vérifier si c'est une vidéo
-      // eslint-disable-next-line no-prototype-builtins
+      // Si ce n'est pas une image, vérifier si c'est une vidéo
     }
-    if (photographerDataMediaById.hasOwnProperty("video")) {
+    if (Object.prototype.hasOwnProperty.call(photographerDataMediaById, "video")) {
       return new VideoMedia(photographerDataMediaById, photographerDataById)
     }
-    //? Si le type de média est inconnu, lever une erreur
+    // Si le type de média est inconnu, lever une erreur
     throw new Error("Unknown media type")
   }
 }
 
 class ImageMedia {
   constructor(photographerDataMediaById) {
-    //? Définir les propriétés d'une image
+    // Définir les propriétés d'une image
     this.id = photographerDataMediaById.id
     this.title = photographerDataMediaById.title
     this.type = "image"
@@ -72,7 +70,7 @@ class ImageMedia {
 
 class VideoMedia {
   constructor(photographerDataMediaById) {
-    //? Définir les propriétés d'une vidéo
+    // Définir les propriétés d'une vidéo
     this.id = photographerDataMediaById.id
     this.title = photographerDataMediaById.title
     this.type = "video"
