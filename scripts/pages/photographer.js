@@ -1,3 +1,4 @@
+// TODO: Ajouter un console.log de la souission du formulaire de contact
 import { getData } from "../utils/API.js"
 import { Photographer } from "../models/photographer.js"
 import { Medias } from "../models/medias.js"
@@ -20,7 +21,9 @@ const id = urlParams.get("id")
 // function to render photographer page
 const renderPhotographer = async (photographer, media) => {
   // Get photographer medias and sort them by popularity
-  const photographerMedias = media.filter((media) => media.photographerId == id).sort((a, b) => b.likes - a.likes)
+  const photographerMedias = media
+    .filter((media) => String(media.photographerId) === id)
+    .sort((a, b) => b.likes - a.likes)
 
   // Render photographer page elements
   renderMeta(photographer)

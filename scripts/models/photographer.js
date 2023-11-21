@@ -42,7 +42,7 @@ export class Photographer {
   }
 
   static findById(id, photographers) {
-    return photographers.find((photographer) => photographer.id == id)
+    return photographers.find((photographer) => String(photographer.id) === id)
   }
 
   getCardTemplate(templateId) {
