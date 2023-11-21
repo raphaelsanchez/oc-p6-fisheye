@@ -69,28 +69,30 @@
     </dialog>
 
     <!-- Contact Form -->
-    <dialog class="photographer-contact" id="contact-form-modal">
-      <h2 tabindex="0">Contactez-moi <span class="photographer-contact__name"></span></h2>
+    <dialog class="photographer-contact" id="contact-form-modal" aria-labelledby="photographer-contact__title">
+      <h2 id="photographer-contact__title" tabindex="0">Contactez-moi <span class="photographer-contact__name"></span>
+      </h2>
       <form class="photographer-contact__form" method="dialog">
         <div class="input-group">
           <label for="firstname">Prénom</label>
-          <input type="text" id="firstname" name="firstname" placeholder="John" />
+          <input type="text" id="firstname" name="firstname">
         </div>
         <div class="input-group">
           <label for="lastname">Nom</label>
-          <input type="text" name="lastname" id="lastname" placeholder="Doe">
+          <input type="text" name="lastname" id="lastname">
         </div>
         <div class="input-group">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="john@doe.com">
+          <input type="email" name="email" id="email">
         </div>
         <div class="input-group">
           <label for="message">Votre message</label>
-          <textarea name="message" id="message" cols="30" rows="10" placeholder="Un petit doux..."></textarea>
+          <textarea name="message" id="message" cols="30" rows="10"></textarea>
         </div>
-        <button class="button" type="submit">envoyer</button>
+        <button class="button" type="submit">Envoyer</button>
         <button class="close" data-dismiss>
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 42 42" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 42 42" fill="none"
+            aria-label="Fermer le formulaire">
             <path
               d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z"
               fill="white" />
