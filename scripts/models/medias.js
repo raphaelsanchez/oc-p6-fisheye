@@ -26,7 +26,8 @@ class ImageMedia {
       // Replace the extension with .webp
       this.src = this.src.replace(/\.(jpg|png)$/, ".webp")
     }
-    this.placeholder = `../assets/medias/${photographerDataMediaById.image.replace(/\.(jpg|jpeg|png)$/i, ".min.webp")}`
+    this.placeholder = `../assets/medias/${photographerDataMediaById.image.replace(/\.(jpg|jpeg|png)$/i, ".20.webp")}`
+    this.thumbnail = `../assets/medias/${photographerDataMediaById.image.replace(/\.(jpg|jpeg|png)$/i, ".350.webp")}`
     this.alt = photographerDataMediaById.title
     this.likes = photographerDataMediaById.likes
   }
@@ -37,7 +38,7 @@ class ImageMedia {
     imageElement.classList.add("lightbox__image")
     imageElement.src = this.src
     imageElement.alt = this.alt
-    imageElement.loading = "lazy"
+    imageElement.setAttribute("loading", "lazy")
     return imageElement
   }
 
@@ -53,9 +54,8 @@ class ImageMedia {
     mediaCard.querySelector(".media-card__link").setAttribute("href", `${this.src}`)
     mediaCard.querySelector(".media-card__title").textContent = this.title
     mediaCard.querySelector(".media-card__likes .count").textContent = this.likes
-    mediaCard.querySelector(".media-card__image").src = `${this.src}`
+    mediaCard.querySelector(".media-card__image").src = `${this.thumbnail}`
     mediaCard.querySelector(".media-card__image").alt = this.alt
-    mediaCard.querySelector(".media-card__image").loading = "lazy"
 
     // fade in image when loaded
     const image = mediaCard.querySelector(".media-card__image")
@@ -84,7 +84,6 @@ class VideoMedia {
     const videoElement = document.createElement("video")
     videoElement.classList.add("lightbox__video")
     videoElement.src = this.src
-    videoElement.loading = "lazy"
     videoElement.controls = true
     videoElement.autoplay = true
     videoElement.muted = true

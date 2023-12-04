@@ -9,7 +9,7 @@ export class Photographer {
     this._price = data.price
     this._portrait = data.portrait.replace(/\.(jpg|png)$/, ".webp")
     // portrait placeholder
-    this._portraitPlaceholder = data.portrait.replace(/\.(jpg|jpeg|png)$/i, ".min.webp")
+    this._portraitPlaceholder = data.portrait.replace(/\.(jpg|jpeg|png)$/i, ".20.webp")
 
     // Constantes
     this._IMAGE_PATH = "./assets/photographers/"
