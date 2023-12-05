@@ -59,7 +59,6 @@ export class Photographer {
       .style.setProperty("--background-image", `url(../assets/photographers/${this._portraitPlaceholder})`)
     photographerCard.querySelector(".photographer-card__image").width = this._IMAGE_WIDTH
     photographerCard.querySelector(".photographer-card__image").height = this._IMAGE_HEIGHT
-    photographerCard.querySelector(".photographer-card__image").loading = "lazy"
     photographerCard.querySelector(".photographer-card__link").href = `./photographer.html?id=${this.id}`
     photographerCard.querySelector(".photographer-card__name").textContent = this.name
     photographerCard.querySelector(".photographer-card__location").textContent = this.location
