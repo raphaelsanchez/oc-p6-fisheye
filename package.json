@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "postcss css/style.css -o dist/style.css --watch --verbose",
+    "build": "postcss css/style.css -o dist/style.css",
     "lint": "eslint .",
     "optimize:medias": "node ./scripts/utils/medias-optimizer.mjs"
   },
