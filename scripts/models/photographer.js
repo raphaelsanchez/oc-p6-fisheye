@@ -7,7 +7,7 @@ export class Photographer {
     this._tags = data.tags
     this._tagline = data.tagline
     this._price = data.price
-    this._portrait = data.portrait.replace(/\.(jpg|png)$/, ".webp")
+    this._portrait = data.portrait.replace(/\.(jpg|jpeg|png)$/, ".webp")
     // portrait placeholder
     this._portraitPlaceholder = data.portrait.replace(/\.(jpg|jpeg|png)$/i, ".20.webp")
 
@@ -52,11 +52,11 @@ export class Photographer {
 
     // Rendu des données
     photographerCard.querySelector(".photographer-card").id = `photographer-${this.id}`
-    photographerCard.querySelector(".photographer-card__image").src = `${this._IMAGE_PATH}${this.portrait}`
     // set placeholder
     photographerCard
       .querySelector(".photographer-card__media")
       .style.setProperty("--background-image", `url(../assets/photographers/${this._portraitPlaceholder})`)
+    photographerCard.querySelector(".photographer-card__image").src = `${this._IMAGE_PATH}${this.portrait}`
     photographerCard.querySelector(".photographer-card__image").width = this._IMAGE_WIDTH
     photographerCard.querySelector(".photographer-card__image").height = this._IMAGE_HEIGHT
     photographerCard.querySelector(".photographer-card__link").href = `./photographer.html?id=${this.id}`
@@ -72,7 +72,7 @@ export class Photographer {
     const image = photographerCard.querySelector(".photographer-card__image")
     image.addEventListener("load", () => {
       image.classList.add("loaded")
-      image.parentElement.removeAttribute("style")
+      // image.parentElement.removeAttribute("style")
     })
 
     return photographerCard

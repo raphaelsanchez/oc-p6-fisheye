@@ -12,7 +12,7 @@
   overflow: hidden;
   border-radius: var(--radius);
   width: 100%;
-  aspect-ratio: 21 / 18;
+  aspect-ratio: 350 / 300;
   cursor: pointer;
 }
 .media-card__link {

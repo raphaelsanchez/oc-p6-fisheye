@@ -61,7 +61,7 @@ class ImageMedia {
     const image = mediaCard.querySelector(".media-card__image")
     image.addEventListener("load", () => {
       image.classList.add("loaded")
-      image.parentElement.removeAttribute("style")
+      // image.parentElement.removeAttribute("style")
     })
 
     return mediaCard
