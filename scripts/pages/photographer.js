@@ -59,7 +59,7 @@ const renderHeader = async (photographer) => {
 
   // set header image
   const portraitElement = document.querySelector(SELECTORS.PHOTOGRAPHER_PORTRAIT)
-  portraitElement.src = `./assets/photographers/${photographer.portrait.replace(/\.(jpg|png)$/, ".webp")}`
+  portraitElement.src = `assets/photographers/${photographer.portrait.replace(/\.(jpg|png)$/, ".webp")}`
   portraitElement.alt = `Photo de ${photographer.name}`
 }
 
