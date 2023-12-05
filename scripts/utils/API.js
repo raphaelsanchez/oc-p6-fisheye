@@ -5,11 +5,14 @@ export class API {
   }
 
   async fetchData() {
-    if (!this._data) {
-      const response = await fetch("../data/photographers.json")
-      this._data = await response.json()
+    const response = await fetch("../data/photographers.json")
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
-    return this._data
+
+    const data = await response.json()
+    return data
   }
 }
 
