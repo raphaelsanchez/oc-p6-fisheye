@@ -35,8 +35,19 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-      - run: npm ci
-      - run: npm build
+      
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build dist
+        run: pnpm build
+          
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
