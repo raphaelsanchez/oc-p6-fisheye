@@ -26,8 +26,8 @@ class ImageMedia {
       // Replace the extension with .webp
       this.src = this.src.replace(/\.(jpg|png)$/, ".webp")
     }
-    this.placeholder = `assets/medias/${photographerDataMediaById.image.replace(/\.(jpg|jpeg|png)$/i, ".20.webp")}`
-    this.thumbnail = `assets/medias/${photographerDataMediaById.image.replace(/\.(jpg|jpeg|png)$/i, ".350.webp")}`
+    this.placeholder = `../assets/medias/${photographerDataMediaById.image.replace(/\.(jpg|jpeg|png)$/i, ".20.webp")}`
+    this.thumbnail = `../assets/medias/${photographerDataMediaById.image.replace(/\.(jpg|jpeg|png)$/i, ".350.webp")}`
     this.alt = photographerDataMediaById.title
     this.likes = photographerDataMediaById.likes
   }
