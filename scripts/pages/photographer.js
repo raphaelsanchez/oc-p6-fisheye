@@ -1,4 +1,3 @@
-// TODO: Ajouter un console.log de la souission du formulaire de contact
 import { getData } from "../utils/API.js"
 import { Photographer } from "../models/photographer.js"
 import { Medias } from "../models/medias.js"
@@ -64,7 +63,6 @@ const renderHeader = async (photographer) => {
 }
 
 // Function to render photographer gallery !
-// TODO: (maybe) refactor this function
 const renderGallery = async (photographerMedias) => {
   const mediaSection = document.querySelector(".photographer-medias__gallery")
   const selectElement = document.querySelector("#sortBy")

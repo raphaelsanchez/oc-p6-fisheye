@@ -16,7 +16,7 @@ export class API {
   }
 }
 
-// Parse le JSON en toute sécurité
+// Safely parse JSON
 function safeJSONParse(str, fallbackValue) {
   try {
     return JSON.parse(str)
@@ -28,12 +28,10 @@ function safeJSONParse(str, fallbackValue) {
 // Fetch data from API or cache
 export async function getData() {
   const cacheKey = "photographersData"
-  const cacheDuration = 60 * 60 * 1000 // 1 hour in milliseconds
+  const cacheDuration = 60 * 60 * 1000 // 1 hour
 
-  // on retrouve les données "cachées"
   const cachedData = safeJSONParse(localStorage.getItem(cacheKey), null)
 
-  // TODO: replace timestamp by etag
   if (cachedData) {
     const { data, timestamp } = cachedData
     if (Date.now() - timestamp < cacheDuration) {
@@ -46,7 +44,7 @@ export async function getData() {
     const api = new API()
     const data = await api.fetchData()
 
-    // mise à jour du cache
+    // Update cache
     const cacheData = { data, timestamp: Date.now() }
     localStorage.setItem(cacheKey, JSON.stringify(cacheData))
     return data
