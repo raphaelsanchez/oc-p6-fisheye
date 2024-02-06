@@ -1,3 +1,5 @@
+"use strict"
+
 /**
  * Class representing an API to fetch data from a JSON file.
  */

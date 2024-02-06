@@ -1,3 +1,5 @@
+"use strict"
+
 // Import des modules externes
 import { getData } from "../utils/API.js"
 import { Photographer } from "../models/photographer.js"

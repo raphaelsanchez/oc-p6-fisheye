@@ -1,3 +1,5 @@
+"use strict"
+
 /**
  * Opens a modal dialog.
  * @param {HTMLElement} button - The button that triggers the modal.

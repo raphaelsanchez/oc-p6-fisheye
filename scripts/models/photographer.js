@@ -1,3 +1,5 @@
+"use strict"
+
 /**
  * Class representing a photographer.
  */

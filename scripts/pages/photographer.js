@@ -1,3 +1,5 @@
+"use strict"
+
 import { getData } from "../utils/API.js"
 import { Photographer } from "../models/photographer.js"
 import { Medias } from "../models/medias.js"

@@ -1,3 +1,5 @@
+"use strict"
+
 /**
  * Class representing a collection of media.
  */
