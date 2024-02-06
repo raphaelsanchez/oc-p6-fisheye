@@ -19,3 +19,6 @@
 @import "layouts/footer.css";
 @import "layouts/home.css";
 @import "layouts/photographer.css";
+
+/* UTILS */
+@import "utils/a11y.css";

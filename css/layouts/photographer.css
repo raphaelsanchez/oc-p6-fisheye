@@ -92,7 +92,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 4rem;
-  padding-block: 2.62rem;
+  padding: 2.62rem 0;
+  list-style: none;
 }
 
 /* Filters */
