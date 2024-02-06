@@ -38,14 +38,17 @@
     <section class="photographer-medias">
       <h2 class="sr-only">Réalisations</h2>
       <!-- Custom select FIlters -->
-      <form class="photographer-medias__filters">
-        <label for="sortBy">Trier par</label>
-        <select name="sortBy" id="sortBy">
-          <option value="popularity">Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
-        </select>
-      </form>
+      <div class="photographer-medias__filters">
+        <span>Trier par</span>
+        <div class="photographer-medias__dropdown">
+          <button class="photographer-medias__dropdown-button" id="filterDropdownButton">Popularité</button>
+          <ul class="photographer-medias__dropdown-list" id="filterList">
+            <li class="photographer-medias__dropdown-item" data-filter="popularity">Popularité</li>
+            <li class="photographer-medias__dropdown-item" data-filter="date">Date</li>
+            <li class="photographer-medias__dropdown-item" data-filter="title">Titre</li>
+          </ul>
+        </div>
+      </div>
 
       <ul class="photographer-medias__gallery"></ul>
     </section>

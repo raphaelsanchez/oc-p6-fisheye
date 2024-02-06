@@ -1,0 +1,70 @@
+.photographer-medias__dropdown {
+  position: relative;
+  z-index: 100;
+  background-color: var(--clr-primary);
+  color: var(--clr-primary-contrast);
+  border-radius: var(--radius);
+}
+.photographer-medias__dropdown-list {
+  position: absolute;
+  top: calc(100% - var(--radius));
+  inset-inline: 0;
+  list-style: none;
+  padding: 0 0.5rem;
+  margin: 0;
+  background-color: var(--clr-primary);
+  color: var(--clr-primary-contrast);
+  max-height: 0;
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+.photographer-medias__dropdown-list.visible {
+  max-height: min-content;
+}
+.photographer-medias__dropdown-list,
+.photographer-medias__dropdown-button {
+  border-radius: var(--radius);
+}
+
+.photographer-medias__dropdown-button,
+.photographer-medias__dropdown-item {
+  background-color: var(--clr-primary);
+  color: var(--clr-primary-contrast);
+  border: none;
+  padding: 1rem 1.5rem;
+  min-width: 145px;
+  text-align: start;
+  cursor: pointer;
+}
+
+.photographer-medias__dropdown-item {
+  border-top: 1px solid var(--clr-primary-contrast);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.photographer-medias__dropdown-item.hidden {
+  display: none;
+}
+
+.photographer-medias__dropdown-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  font-weight: bold;
+}
+.photographer-medias__dropdown-button::after {
+  content: "";
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPG1hc2sgaWQ9Im1hc2swXzNfNSIgc3R5bGU9Im1hc2stdHlwZTpsdW1pbmFuY2UiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjAiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiI+CjxwYXRoIGQ9Ik0zMiAyLjc5NzUzZS0wNkwxLjkwNzM1ZS0wNiAwTC04LjkwMThlLTA3IDMyTDMyIDMyTDMyIDIuNzk3NTNlLTA2WiIgZmlsbD0id2hpdGUiLz4KPC9tYXNrPgo8ZyBtYXNrPSJ1cmwoI21hc2swXzNfNSkiPgo8cGF0aCBkPSJNMjIuMTIgMTEuNDUzNEwxNiAxNy41Nkw5Ljg4IDExLjQ1MzRMOCAxMy4zMzM0TDE2IDIxLjMzMzRMMjQgMTMuMzMzNEwyMi4xMiAxMS40NTM0WiIgZmlsbD0id2hpdGUiLz4KPC9nPgo8L3N2Zz4K);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.photographer-medias__dropdown-button.active::after {
+  transform: rotate(180deg);
+}
