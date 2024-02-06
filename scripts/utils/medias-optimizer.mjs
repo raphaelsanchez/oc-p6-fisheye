@@ -38,7 +38,7 @@ const generateResizedImage = async (filePath, size) => {
   if (size === 350) {
     height = 300
   }
-  const imageBuffer = await sharp(filePath).resize({ width: size, height: height, fit: "cover" }).webp().toBuffer()
+  const imageBuffer = await sharp(filePath).resize({ width: size, height, fit: "cover" }).webp().toBuffer()
   await fs.promises.writeFile(filePath.replace(/\.(jpg|jpeg)$/i, `.${size}.webp`), imageBuffer)
 }
 
@@ -68,7 +68,7 @@ const isSizeAlreadyGenerated = async (filePath, size) => {
 const processFolder = async (folderPath) => {
   const files = await fs.promises.readdir(folderPath, { withFileTypes: true })
   let count = 0
-  let total = files.filter(
+  const total = files.filter(
     (file) => !file.isDirectory() && /\.(jpg|jpeg)$/i.test(file.name) && !IGNORED_FILES.includes(file.name),
   ).length
   for (const file of files) {
