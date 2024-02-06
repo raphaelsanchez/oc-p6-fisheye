@@ -8,12 +8,12 @@ import { Likes } from "../models/likes.js"
 import { Lightbox } from "../models/lightbox.js"
 
 const SELECTORS = {
-  PHOTOGRAPHER_NAME: ".photographer-infos__name",
-  PHOTOGRAPHER_LOCATION: ".photographer-infos__location",
-  PHOTOGRAPHER_TAGLINE: ".photographer-infos__tagline",
-  PHOTOGRAPHER_PORTRAIT: ".photographer-infos__image",
-  PHOTOGRAPHER_PRICE: ".photographer-aside__price .count",
-  PHOTOGRAPHER_LIKES: ".photographer-aside__likes .count",
+  photographerName: ".photographer-infos__name",
+  photographerLocation: ".photographer-infos__location",
+  photographerTagline: ".photographer-infos__tagline",
+  photographerPortrait: ".photographer-infos__image",
+  photographerPrice: ".photographer-aside__price .count",
+  photographerLikes: ".photographer-aside__likes .count",
 }
 
 const urlParams = new URLSearchParams(window.location.search)
@@ -59,11 +59,11 @@ const renderHeader = async (photographer) => {
     element.textContent = value
   }
 
-  setElementText(SELECTORS.PHOTOGRAPHER_NAME, photographer.name)
-  setElementText(SELECTORS.PHOTOGRAPHER_LOCATION, photographer.location)
-  setElementText(SELECTORS.PHOTOGRAPHER_TAGLINE, photographer.tagline)
+  setElementText(SELECTORS.photographerName, photographer.name)
+  setElementText(SELECTORS.photographerLocation, photographer.location)
+  setElementText(SELECTORS.photographerTagline, photographer.tagline)
 
-  const portraitElement = document.querySelector(SELECTORS.PHOTOGRAPHER_PORTRAIT)
+  const portraitElement = document.querySelector(SELECTORS.photographerPortrait)
   portraitElement.src = `assets/photographers/${photographer.portrait.replace(/\.(jpg|jpeg|png)$/, ".webp")}`
   portraitElement.alt = `Photo de ${photographer.name}`
 }
@@ -160,10 +160,10 @@ const renderGallery = async (photographerMedias) => {
  * @param {Array} photographerMedias - The media data of the photographer.
  */
 const renderAside = async (photographer, photographerMedias) => {
-  const priceElement = document.querySelector(SELECTORS.PHOTOGRAPHER_PRICE)
+  const priceElement = document.querySelector(SELECTORS.photographerPrice)
   priceElement.textContent = `${photographer.price}€/jour`
 
-  const totalLikesCounter = document.querySelector(SELECTORS.PHOTOGRAPHER_LIKES)
+  const totalLikesCounter = document.querySelector(SELECTORS.photographerLikes)
   const totalLikes = photographerMedias.reduce((sum, media) => sum + media.likes, 0)
 
   totalLikesCounter.textContent = totalLikes
