@@ -49,12 +49,17 @@ label {
   line-height: 1.1;
 }
 
-/* Balance text wrapping on headings */
-h1,
-h2,
-h3,
-h4 {
-  text-wrap: balance;
+/** 
+ * Balance text wrapping on headings 
+ * progressively enhance to support browsers that support text-wrap
+*/
+@supports (text-wrap: balance) {
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
 }
 
 p:empty {
