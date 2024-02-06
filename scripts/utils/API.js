@@ -59,7 +59,7 @@ export async function getData() {
     const { data, timestamp } = cachedData
     // Check if the cached data is less than 1 hour old
     if (Date.now() - timestamp < cacheDuration) {
-      console.log("Serving from cache")
+      console.info("%cServing from cache", "background: #5DADE2; color: white; padding: 2px 4px; border-radius: 4px;")
       return data
     }
   }

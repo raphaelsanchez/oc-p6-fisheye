@@ -198,13 +198,16 @@ const attachFormHandlers = (photographer) => {
   form.addEventListener("submit", (e) => {
     e.preventDefault()
     const date = new Date()
-    console.log(
-      `Form submitted for ${photographer.name} on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`,
-    )
+    console.group("%cForm submission", "background: #FFA500; color: black; padding: 2px 4px; border-radius: 4px;")
+    console.log(`for ${photographer.name}`)
+    console.log(`Date: ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`)
     const formData = new FormData(form)
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`)
-    }
+    const data = Array.from(formData.entries()).reduce((obj, [key, value]) => {
+      obj[key] = value
+      return obj
+    }, {})
+    console.table(data)
+    console.groupEnd()
   })
 }
 
