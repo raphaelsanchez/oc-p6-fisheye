@@ -1,6 +1,13 @@
 import { Medias } from "./medias.js"
 
+/**
+ * Class representing a lightbox.
+ */
 export class Lightbox {
+  /**
+   * Create a lightbox.
+   * @param {Array} mediaArray - The array of media items.
+   */
   constructor(mediaArray) {
     this.mediaArray = mediaArray
     this.currentIndex = 0
@@ -8,6 +15,10 @@ export class Lightbox {
     this.contentElement = document.querySelector(".lightbox__content")
   }
 
+  /**
+   * Open the lightbox at a specific index.
+   * @param {number} index - The index to open the lightbox at.
+   */
   open(index) {
     this.currentIndex = index
     this.updateDisplay()
@@ -15,45 +26,44 @@ export class Lightbox {
     document.body.classList.add("prevent-scroll")
   }
 
+  /**
+   * Close the lightbox.
+   */
   close() {
     this.lightboxElement.close()
     document.body.classList.remove("prevent-scroll")
   }
 
+  /**
+   * Go to the next item in the lightbox.
+   */
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.mediaArray.length
-    // this.currentIndex = this.currentIndex + 1 > this.mediaArray.length ? 0 : this.currentIndex + 1
     this.updateDisplay()
   }
 
+  /**
+   * Go to the previous item in the lightbox.
+   */
   previous() {
     this.currentIndex = (this.currentIndex - 1 + this.mediaArray.length) % this.mediaArray.length
     this.updateDisplay()
   }
 
+  /**
+   * Update the display of the lightbox.
+   */
   updateDisplay() {
-    // Supprimer le contenu précédent
     this.contentElement.innerHTML = ""
-
-    // Obtenir le média actuel
     const currentMedia = this.mediaArray[this.currentIndex]
-
-    // Créer le média
     const mediaElements = new Medias().createMedia(currentMedia, this.mediaArray)
-
-    // Créer un élément HTML en fonction du type de media sans utiliser de template
     const mediaElement =
       mediaElements.type === "image" ? mediaElements.getImageMediaElement() : mediaElements.getVideoMediaElement()
-
-    // Créer un élément HTML pour le titre du média
     const mediaTitle = document.createElement("h2")
     mediaTitle.classList.add("lightbox__title")
     mediaTitle.textContent = currentMedia.title
-
     mediaElement.setAttribute("tabindex", "0")
     mediaTitle.setAttribute("tabindex", "0")
-
-    // Ajouter le média à la lightbox
     this.contentElement.appendChild(mediaElement)
     this.contentElement.appendChild(mediaTitle)
   }

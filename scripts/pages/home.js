@@ -2,12 +2,14 @@
 import { getData } from "../utils/API.js"
 import { Photographer } from "../models/photographer.js"
 
-// Fonction pour afficher la page d'accueil
+/**
+ * Function to render the home page.
+ */
 const renderHome = async () => {
-  // Récupération des données
+  // Fetch data from the API
   const { photographers } = await getData()
 
-  // Rendu des cartes de photographes
+  // Render photographer cards
   const photographersSection = document.getElementById("photographers-wrapper")
   photographers.forEach((photographer) => {
     const photographerModel = new Photographer(photographer)
@@ -16,5 +18,5 @@ const renderHome = async () => {
   })
 }
 
-// Au chargement de la page, on affiche les données
+// Render the home page when the DOM is fully loaded
 window.addEventListener("DOMContentLoaded", renderHome)
