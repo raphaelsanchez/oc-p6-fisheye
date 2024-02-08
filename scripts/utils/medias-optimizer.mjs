@@ -1,10 +1,25 @@
+"use strict"
+
 import fs from "fs"
 import path from "path"
 import sharp from "sharp"
 
-// Constants
+/**
+ * Sizes for the resized images.
+ * @type {number[]}
+ */
 const SIZES = [1920, 350, 20]
+
+/**
+ * Source folder for the images.
+ * @type {string}
+ */
 const SOURCE_FOLDER = "./assets/"
+
+/**
+ * Files to be ignored during the process.
+ * @type {string[]}
+ */
 const IGNORED_FILES = [
   "logo.png",
   "favicon.ico",
@@ -15,17 +30,26 @@ const IGNORED_FILES = [
   "apple-touch-icon.png",
 ]
 
-// Generate a resized image
+/**
+ * Generate a resized image.
+ * @param {string} filePath - The path of the image file.
+ * @param {number} size - The size for the resized image.
+ */
 const generateResizedImage = async (filePath, size) => {
   let height = null
   if (size === 350) {
     height = 300
   }
-  const imageBuffer = await sharp(filePath).resize({ width: size, height: height, fit: "cover" }).webp().toBuffer()
+  const imageBuffer = await sharp(filePath).resize({ width: size, height, fit: "cover" }).webp().toBuffer()
   await fs.promises.writeFile(filePath.replace(/\.(jpg|jpeg)$/i, `.${size}.webp`), imageBuffer)
 }
 
-// Check if a size of an image has already been generated
+/**
+ * Check if a size of an image has already been generated.
+ * @param {string} filePath - The path of the image file.
+ * @param {number} size - The size for the resized image.
+ * @return {Promise<boolean>} Whether the size has already been generated.
+ */
 const isSizeAlreadyGenerated = async (filePath, size) => {
   const webpFilePath = path.join(
     path.dirname(filePath),
@@ -39,12 +63,14 @@ const isSizeAlreadyGenerated = async (filePath, size) => {
   }
 }
 
-// Process images in folders
+/**
+ * Process images in folders.
+ * @param {string} folderPath - The path of the folder.
+ */
 const processFolder = async (folderPath) => {
-  // Generate a resized image thats not ignored
   const files = await fs.promises.readdir(folderPath, { withFileTypes: true })
   let count = 0
-  let total = files.filter(
+  const total = files.filter(
     (file) => !file.isDirectory() && /\.(jpg|jpeg)$/i.test(file.name) && !IGNORED_FILES.includes(file.name),
   ).length
   for (const file of files) {
@@ -73,7 +99,9 @@ const processFolder = async (folderPath) => {
   }
 }
 
-// Run the image processing script and log in console
+/**
+ * Run the image processing script and log in console.
+ */
 const run = async () => {
   try {
     console.log("\n=============================================\n")

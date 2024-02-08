@@ -1,4 +1,5 @@
-// TODO: Ajouter un console.log de la souission du formulaire de contact
+"use strict"
+
 import { getData } from "../utils/API.js"
 import { Photographer } from "../models/photographer.js"
 import { Medias } from "../models/medias.js"
@@ -7,34 +8,22 @@ import { Likes } from "../models/likes.js"
 import { Lightbox } from "../models/lightbox.js"
 
 const SELECTORS = {
-  PHOTOGRAPHER_NAME: ".photographer-infos__name",
-  PHOTOGRAPHER_LOCATION: ".photographer-infos__location",
-  PHOTOGRAPHER_TAGLINE: ".photographer-infos__tagline",
-  PHOTOGRAPHER_PORTRAIT: ".photographer-infos__image",
-  PHOTOGRAPHER_PRICE: ".photographer-aside__price .count",
-  PHOTOGRAPHER_LIKES: ".photographer-aside__likes .count",
+  photographerName: ".photographer-infos__name",
+  photographerLocation: ".photographer-infos__location",
+  photographerTagline: ".photographer-infos__tagline",
+  photographerPortrait: ".photographer-infos__image",
+  photographerPrice: ".photographer-aside__price .count",
+  photographerLikes: ".photographer-aside__likes .count",
 }
 
 const urlParams = new URLSearchParams(window.location.search)
 const id = urlParams.get("id")
 
-// function to render photographer page
-const renderPhotographer = async (photographer, media) => {
-  // Get photographer medias and sort them by popularity
-  const photographerMedias = media
-    .filter((media) => String(media.photographerId) === id)
-    .sort((a, b) => b.likes - a.likes)
-
-  // Render photographer page elements
-  renderMeta(photographer)
-  renderHeader(photographer)
-  renderGallery(photographerMedias)
-  renderAside(photographer, photographerMedias)
-}
-
-// Function to render photographer meta
+/**
+ * Function to render photographer meta.
+ * @param {Object} photographer - The photographer data.
+ */
 const renderMeta = async (photographer) => {
-  // set metas data
   const metaTitle = document.querySelector("title")
   metaTitle.textContent = `${photographer.name} - FishEye`
   const metaDescription = document.querySelector('meta[name="description"]')
@@ -44,50 +33,87 @@ const renderMeta = async (photographer) => {
   )
 }
 
-// Function to render photographer header
+/**
+ * Function to render photographer header.
+ * @param {Object} photographer - The photographer data.
+ */
 const renderHeader = async (photographer) => {
-  // Function to set element text
   const setElementText = (selector, value) => {
     const element = document.querySelector(selector)
     element.textContent = value
   }
 
-  // set header data
-  setElementText(SELECTORS.PHOTOGRAPHER_NAME, photographer.name)
-  setElementText(SELECTORS.PHOTOGRAPHER_LOCATION, photographer.location)
-  setElementText(SELECTORS.PHOTOGRAPHER_TAGLINE, photographer.tagline)
+  setElementText(SELECTORS.photographerName, photographer.name)
+  setElementText(SELECTORS.photographerLocation, photographer.location)
+  setElementText(SELECTORS.photographerTagline, photographer.tagline)
 
-  // set header image
-  const portraitElement = document.querySelector(SELECTORS.PHOTOGRAPHER_PORTRAIT)
+  const portraitElement = document.querySelector(SELECTORS.photographerPortrait)
   portraitElement.src = `assets/photographers/${photographer.portrait.replace(/\.(jpg|jpeg|png)$/, ".webp")}`
   portraitElement.alt = `Photo de ${photographer.name}`
 }
 
-// Function to render photographer gallery !
-// TODO: (maybe) refactor this function
+/**
+ * Renders the media section.
+ * @param {Element} mediaSection - The media section element.
+ * @param {Array} photographerMedias - The media data of the photographer.
+ * @param {Element} totalLikesCounter - The total likes counter element.
+ * @param {Lightbox} lightbox - The lightbox instance.
+ */
+const renderMediaSection = (mediaSection, photographerMedias, totalLikesCounter, lightbox) => {
+  mediaSection.innerHTML = ""
+  photographerMedias.forEach((media, index) => renderMedia(media, mediaSection, index, totalLikesCounter, lightbox))
+}
+
+/**
+ * Renders a media item.
+ * @param {Object} media - The media data.
+ * @param {Element} mediaSection - The media section element.
+ * @param {number} index - The index of the media item.
+ * @param {Element} totalLikesCounter - The total likes counter element.
+ * @param {Lightbox} lightbox - The lightbox instance.
+ */
+const renderMedia = (media, mediaSection, index, totalLikesCounter, lightbox) => {
+  if (!media) {
+    console.error("Media is undefined or null:", media)
+    return
+  }
+  const mediaElements = new Medias().createMedia(media)
+  const mediaTemplate =
+    mediaElements.type === "image"
+      ? mediaElements.getImageMediaTemplate("media-image-template")
+      : mediaElements.getVideoMediaTemplate("media-video-template")
+
+  const lightboxTrigger = mediaTemplate.querySelector(".media-card__link")
+  lightboxTrigger.addEventListener("click", (e) => {
+    e.preventDefault()
+    lightbox.open(index)
+  })
+
+  const likeButton = mediaTemplate.querySelector(".media-card__likes")
+  const likes = new Likes(likeButton, totalLikesCounter)
+  likes.addLikeHandler()
+
+  mediaSection.appendChild(mediaTemplate)
+}
+
+/**
+ * Renders the gallery.
+ * @param {Array} photographerMedias - The media data of the photographer.
+ */
 const renderGallery = async (photographerMedias) => {
   const mediaSection = document.querySelector(".photographer-medias__gallery")
-  const selectElement = document.querySelector("#sortBy")
 
-  // new lightbox instance
   const lightbox = new Lightbox(photographerMedias)
+  const totalLikesCounter = document.querySelector(".photographer-aside__likes .count")
 
-  // Previous and next buttons
   const previousButton = document.querySelector(".lightbox__prev")
   const nextButton = document.querySelector(".lightbox__next")
   const closeButton = document.querySelector(".lightbox__close")
 
-  // Attach event listeners
-  const attachEventListener = (element, event, handler) => {
-    element.addEventListener(event, handler)
-  }
-
-  // Attach event listeners to lightbox buttons
   attachEventListener(previousButton, "click", () => lightbox.previous())
   attachEventListener(nextButton, "click", () => lightbox.next())
   attachEventListener(closeButton, "click", () => lightbox.close())
 
-  // Close lightbox on escape key press
   attachEventListener(document, "keydown", (e) => {
     switch (e.key) {
       case "Escape":
@@ -102,79 +128,120 @@ const renderGallery = async (photographerMedias) => {
     }
   })
 
-  // Function to sort media
-  const sortMedia = (media, comparator) => {
-    media.sort(comparator)
-    renderMediaSection(mediaSection, media)
-  }
+  attachFilterHandlers(photographerMedias)
 
-  // Refactor the sort functions
-  const sortMediaByPopularity = () => sortMedia(photographerMedias, (a, b) => b.likes - a.likes)
-  const sortMediaByDate = () => sortMedia(photographerMedias, (a, b) => new Date(b.date) - new Date(a.date))
-  const sortMediaByTitle = () => sortMedia(photographerMedias, (a, b) => a.title.localeCompare(b.title))
-
-  // Refactor the renderMediaSection function
-  const renderMediaSection = (mediaSection, photographerMedias) => {
-    mediaSection.innerHTML = ""
-    const totalLikesCounter = document.querySelector(".photographer-aside__likes .count")
-    photographerMedias.forEach((media, index) => renderMedia(media, index, totalLikesCounter))
-  }
-
-  // Function to render media
-  const renderMedia = (media, index, totalLikesCounter) => {
-    // get media template
-    const mediaElements = new Medias().createMedia(media, photographerMedias)
-    const mediaTemplate =
-      mediaElements.type === "image"
-        ? mediaElements.getImageMediaTemplate("media-image-template")
-        : mediaElements.getVideoMediaTemplate("media-video-template")
-
-    // Add event handler to gallery item
-    const lightboxTrigger = mediaTemplate.querySelector(".media-card__link")
-    lightboxTrigger.addEventListener("click", (e) => {
-      e.preventDefault()
-      lightbox.open(index)
-    })
-
-    // get like button
-    const likeButton = mediaTemplate.querySelector(".media-card__likes")
-    const likes = new Likes(likeButton, totalLikesCounter)
-    likes.addLikeHandler()
-
-    // append media template
-    mediaSection.appendChild(mediaTemplate)
-  }
-
-  // Sort media by select value overwise sort by popularity by default
-  if (selectElement) {
-    selectElement.addEventListener("change", () => {
-      if (selectElement.value === "date") {
-        sortMediaByDate()
-      } else if (selectElement.value === "title") {
-        sortMediaByTitle()
-      } else {
-        sortMediaByPopularity()
-      }
-    })
-  }
-
-  renderMediaSection(mediaSection, photographerMedias)
+  renderMediaSection(mediaSection, photographerMedias, totalLikesCounter, lightbox)
 }
 
-// Function to render photographer aside
+/**
+ * Function to render photographer aside.
+ * @param {Object} photographer - The photographer data.
+ * @param {Array} photographerMedias - The media data of the photographer.
+ */
 const renderAside = async (photographer, photographerMedias) => {
-  // set aside price data
-  const priceElement = document.querySelector(SELECTORS.PHOTOGRAPHER_PRICE)
+  const priceElement = document.querySelector(SELECTORS.photographerPrice)
   priceElement.textContent = `${photographer.price}€/jour`
 
-  // set aside likes data
-  const totalLikesCounter = document.querySelector(SELECTORS.PHOTOGRAPHER_LIKES)
+  const totalLikesCounter = document.querySelector(SELECTORS.photographerLikes)
   const totalLikes = photographerMedias.reduce((sum, media) => sum + media.likes, 0)
 
   totalLikesCounter.textContent = totalLikes
 }
 
-// Modal handlers
+/**
+ * Function to render photographer page.
+ * @param {Object} photographer - The photographer data.
+ * @param {Array} media - The media data.
+ */
+const renderPhotographer = async (photographer, media) => {
+  const photographerMedias = media
+    .filter((media) => String(media.photographerId) === id)
+    .sort((a, b) => b.likes - a.likes)
+
+  renderMeta(photographer)
+  renderHeader(photographer)
+  renderGallery(photographerMedias)
+  renderAside(photographer, photographerMedias)
+}
+
+/**
+ * Sorts media array by popularity (likes).
+ * @param {Array} media - The media array to sort.
+ * @returns {Array} The sorted media array.
+ */
+const sortMediaByPopularity = (media) => {
+  media.sort((a, b) => b.likes - a.likes)
+  return media
+}
+
+/**
+ * Sorts media array by popularity (likes).
+ * @param {Array} media - The media array to sort.
+ * @returns {Array} The sorted media array.
+ */
+const sortMediaByDate = (media) => {
+  media.sort((a, b) => new Date(b.date) - new Date(a.date))
+  return media
+}
+
+/**
+ * Sorts media array by popularity (likes).
+ * @param {Array} media - The media array to sort.
+ * @returns {Array} The sorted media array.
+ */
+const sortMediaByTitle = (media) => {
+  media.sort((a, b) => a.title.localeCompare(b.title))
+  return media
+}
+
+/**
+ * Attaches an event listener to an element.
+ * @param {Element} element - The element to attach the event to.
+ * @param {string} event - The event to listen for.
+ * @param {Function} handler - The function to call when the event is fired.
+ */
+const attachEventListener = (element, event, handler) => {
+  element.addEventListener(event, handler)
+}
+
+/**
+ * Attaches click event listeners to filter list items.
+ * @param {Array} media - The media data of the photographer.
+ */
+function attachFilterHandlers(photographerMedias) {
+  const filterList = document.querySelector("#filterList")
+  filterList.querySelectorAll("li").forEach((listItem) => {
+    listItem.addEventListener("click", () => {
+      const filterValue = listItem.getAttribute("data-filter")
+
+      let filteredMedia
+      switch (filterValue) {
+        case "popularity":
+          filteredMedia = sortMediaByPopularity(photographerMedias)
+          break
+        case "date":
+          filteredMedia = sortMediaByDate(photographerMedias)
+          break
+        case "title":
+          filteredMedia = sortMediaByTitle(photographerMedias)
+          break
+        default:
+          filteredMedia = sortMediaByPopularity(photographerMedias)
+      }
+
+      // Mettez à jour l'affichage des médias
+      const mediaSection = document.querySelector(".photographer-medias__gallery")
+      const totalLikesCounter = document.querySelector(".photographer-aside__likes .count")
+      const lightbox = new Lightbox(filteredMedia)
+      renderMediaSection(mediaSection, filteredMedia, totalLikesCounter, lightbox)
+    })
+  })
+}
+
+/**
+ * Function to attach modal handlers.
+ * @param {Object} photographer - The photographer data.
+ */
 const attachModalHandlers = (photographer) => {
   const modalButtons = document.querySelectorAll("[data-target]")
   modalButtons.forEach((button) => {
@@ -191,37 +258,100 @@ const attachModalHandlers = (photographer) => {
   })
 }
 
-// Form event handler
+/**
+ * Function to attach form handlers.
+ * @param {Object} photographer - The photographer data.
+ */
 const attachFormHandlers = (photographer) => {
   const form = document.querySelector(".photographer-contact__form")
   form.addEventListener("submit", (e) => {
     e.preventDefault()
-    // log form submission date and time
     const date = new Date()
-    console.log(
-      `Form submitted for ${photographer.name} on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`,
-    )
-    // log all form data
+    console.group("%cForm submission", "background: #FFA500; color: black; padding: 2px 4px; border-radius: 4px;")
+    console.log(`for ${photographer.name}`)
+    console.log(`Date: ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`)
     const formData = new FormData(form)
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`)
+    const data = Array.from(formData.entries()).reduce((obj, [key, value]) => {
+      obj[key] = value
+      return obj
+    }, {})
+    console.table(data)
+    console.groupEnd()
+  })
+}
+
+/**
+ * Function to attach dropdown handlers.
+ */
+const attacheDropdownHandlers = () => {
+  const dropdownButton = document.querySelector(".photographer-medias__dropdown-button")
+  const dropdownList = document.querySelector(".photographer-medias__dropdown-list")
+  const dropdownItems = document.querySelectorAll(".photographer-medias__dropdown-item")
+
+  // toggle .visible class on dropdownList
+  dropdownButton.addEventListener("click", () => {
+    dropdownList.classList.toggle("visible")
+    dropdownButton.classList.toggle("active")
+    if (dropdownButton.getAttribute("aria-expanded") === "false") {
+      dropdownButton.setAttribute("aria-expanded", "true")
+    } else {
+      dropdownButton.setAttribute("aria-expanded", "false")
+    }
+  })
+
+  // change button textContent to current item textContent and remove .visible from dropdownList
+  dropdownItems.forEach((item) => {
+    const itemButton = item.children[0]
+    if (itemButton.textContent === dropdownButton.textContent) {
+      item.classList.add("hidden")
+    }
+    itemButton.addEventListener("click", (event) => {
+      dropdownButton.textContent = itemButton.textContent
+      dropdownList.classList.remove("visible")
+      dropdownButton.classList.remove("active")
+      // add .hidden to current item and remove .hidden from other items
+      dropdownItems.forEach((item) => {
+        item.classList.remove("hidden")
+      })
+      item.classList.add("hidden")
+    })
+  })
+
+  // close dropdownList when clicking outside
+  window.addEventListener("click", (event) => {
+    if (!event.target.matches(".photographer-medias__dropdown-button")) {
+      dropdownList.classList.remove("visible")
+      dropdownButton.classList.remove("active")
     }
   })
 }
 
-// Get data and render page when DOM is loaded
+/**
+ * Event listener for the DOMContentLoaded event.
+ * When the DOM is fully loaded, it fetches data, creates a new Photographer instance,
+ * and calls the necessary functions to render the photographer and attach handlers.
+ */
 window.addEventListener("DOMContentLoaded", async () => {
   try {
+    // Fetch data
     const { photographers, media } = await getData()
+
+    // Find the photographer by id
     const photographerData = Photographer.findById(id, photographers)
+
+    // If the photographer is not found, throw an error
     if (!photographerData) {
       throw new Error(`Photographer with id ${id} not found`)
     }
+
+    // Create a new Photographer instance
     const photographer = new Photographer(photographerData)
 
+    // Render the photographer and attach handlers
     renderPhotographer(photographer, media)
     attachModalHandlers(photographer)
     attachFormHandlers(photographer)
+    attacheDropdownHandlers()
   } catch (error) {
     console.error("An error occurred:", error)
   }

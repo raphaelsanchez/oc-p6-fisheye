@@ -20,33 +20,45 @@
 <body>
   <header class="header">
     <a class="header__link" href="./index.html" title="Revenir à l'accueil">
-      <img class="header__logo" src="assets/images/logo.png" width="200" height="50" alt="FishEye Home Page" />
+      <img class="header__logo" src="assets/images/logo.png" width="200" height="50" alt="Logo FishEye" />
     </a>
   </header>
   <main id="photographer-wrapper">
-    <section class="photographer-infos">
-      <div class="photographer-infos__header" tabindex="0">
+    <header class="photographer-infos">
+      <hgroup class="photographer-infos__header" tabindex="0">
         <h1 class="photographer-infos__name"></h1>
-        <p class="photographer-infos__location"></p>
+        <h2 class="photographer-infos__location"></h2>
         <p class="photographer-infos__tagline"></p>
-      </div>
-      <div class="photographer-infos__contact">
-        <button class="button" data-target="#contact-form-modal" aria-label="Contactez-moi">Contactez-moi</button>
-      </div>
-      <img class="photographer-infos__image" tabindex="0" />
-    </section>
+      </hgroup>
+      <button class="button photographer-infos__contact" data-target="#contact-form-modal"
+        aria-label="Ouvrir le formulaire de contact">Contactez-moi</button>
+      <img class="photographer-infos__image" src="https://via.placeholder.com/300" alt="Photo de profil du photographe"
+        tabindex="0" />
+    </header>
 
     <section class="photographer-medias">
+      <h2 class="sr-only">Réalisations</h2>
       <!-- Custom select FIlters -->
-      <form class="photographer-medias__filters">
-        <label for="sortBy">Trier par</label>
-        <select name="sortBy" id="sortBy">
-          <option value="popularity">Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
-        </select>
-      </form>
-      <div class="photographer-medias__gallery"></div>
+      <div class="photographer-medias__filters">
+        <span class="photographer-medias__filters-label" id="filterLabel">Trier par</span>
+        <div class="photographer-medias__dropdown">
+          <button class="photographer-medias__dropdown-button" id="filterDropdownButton" role="button"
+            aria-haspopup="listbox" aria-expanded="false" aria-labelledby="filterLabel filterDropdownButton"
+            aria-controls="filterList">Popularité</button>
+          <ul class="photographer-medias__dropdown-list" id="filterList" role="listbox"
+            aria-activedescendant="filterDropdownButton">
+            <li class="photographer-medias__dropdown-item" data-filter="popularity" role="option" aria-selected="true">
+              <button aria-label="Trier par popularité">Popularité</button>
+            </li>
+            <li class="photographer-medias__dropdown-item" data-filter="date" role="option"><button
+                aria-label="Trier par date">Date</button></li>
+            <li class="photographer-medias__dropdown-item" data-filter="title" role="option"><button
+                aria-label="Trier par titre">Titre</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <ul class="photographer-medias__gallery"></ul>
     </section>
 
     <aside class="photographer-aside">
@@ -61,64 +73,62 @@
         <span class="count"></span>
       </div>
     </aside>
-
-    <!-- Lightbox -->
-    <dialog class="lightbox" aria-label="Vue agrandi">
-      <div class="lightbox__content"></div>
-      <!-- Ligthbox prev/next -->
-      <button class="lightbox__prev">Image précédente</button>
-      <button class="lightbox__next">Image suivante</button>
-      <!-- close button -->
-      <button class="lightbox__close" data-dismiss>Fermer la boite de dialog</button>
-    </dialog>
-
-    <!-- Contact Form -->
-    <dialog class="photographer-contact" id="contact-form-modal" aria-labelledby="photographer-contact__title">
-      <h2 id="photographer-contact__title" tabindex="0">Contactez-moi <span class="photographer-contact__name"></span>
-      </h2>
-      <form class="photographer-contact__form" method="dialog">
-        <div class="input-group">
-          <label for="firstname">Prénom</label>
-          <input type="text" id="firstname" name="firstname">
-        </div>
-        <div class="input-group">
-          <label for="lastname">Nom</label>
-          <input type="text" name="lastname" id="lastname">
-        </div>
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email">
-        </div>
-        <div class="input-group">
-          <label for="message">Votre message</label>
-          <textarea name="message" id="message" cols="30" rows="10"></textarea>
-        </div>
-        <button class="button" type="submit">Envoyer</button>
-        <button class="close" data-dismiss>
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 42 42" fill="none"
-            aria-label="Fermer le formulaire">
-            <path
-              d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z"
-              fill="white" />
-          </svg>
-        </button>
-      </form>
-    </dialog>
   </main>
   <footer class="footer">
     <p>© 2021 Fisheye, OpenClassrooms project — Tous droits réservés.</p>
   </footer>
 
+  <!-- Dialogs -->
+  <dialog class="lightbox" aria-label="Vue agrandi">
+    <div class="lightbox__content"></div>
+    <button class="lightbox__prev" aria-label="Image précédente">Image précédente</button>
+    <button class="lightbox__next" aria-label="Image suivante">Image suivante</button>
+    <button class="lightbox__close" data-dismiss aria-label="Fermer la boite de dialog">Fermer la boite de
+      dialog</button>
+  </dialog>
+
+  <dialog class="photographer-contact" id="contact-form-modal" aria-labelledby="photographer-contact__title">
+    <h2 id="photographer-contact__title" tabindex="0">Contactez-moi <span class="photographer-contact__name"></span>
+    </h2>
+    <form class="photographer-contact__form" method="dialog">
+      <div class="input-group">
+        <label for="firstname">Prénom</label>
+        <input type="text" id="firstname" name="firstname">
+      </div>
+      <div class="input-group">
+        <label for="lastname">Nom</label>
+        <input type="text" name="lastname" id="lastname">
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+      </div>
+      <div class="input-group">
+        <label for="message">Votre message</label>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+      </div>
+      <button class="button" type="submit">Envoyer</button>
+      <button class="close" data-dismiss>
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 42 42" fill="none"
+          aria-label="Fermer le formulaire">
+          <path
+            d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z"
+            fill="white" />
+        </svg>
+      </button>
+    </form>
+  </dialog>
+
   <!-- Templates -->
   <template id="media-image-template">
-    <article class="media-card">
+    <li class="media-card">
       <a class="media-card__link" href="" aria-label="vue rapprochée de l'image">
         <figure class="media-card__media">
           <img class="media-card__image" src="" alt="">
         </figure>
       </a>
       <div class="media-card__infos">
-        <h2 class="media-card__title" tabindex="0"></h2>
+        <h3 class="media-card__title" tabindex="0"></h3>
         <button class="media-card__likes">
           <span class="count"></span>
           <svg class="icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -129,11 +139,11 @@
           </svg>
         </button>
       </div>
-    </article>
+    </li>
   </template>
 
   <template id="media-video-template">
-    <article class="media-card" data-type="video">
+    <li class="media-card" data-type="video">
       <a class="media-card__link" href="" tabindex="0" aria-label="jouer la video en vue rapprochée">
         <figure class="media-card__media">
           <video class="media-card__video" preload="metadata" style="pointer-events: none;">
@@ -148,7 +158,7 @@
         </figure>
       </a>
       <div class="media-card__infos">
-        <h2 class="media-card__title" tabindex="0"></h2>
+        <h3 class="media-card__title" tabindex="0"></h3>
         <button class="media-card__likes">
           <span class="count"></span>
           <svg class="icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +169,7 @@
           </svg>
         </button>
       </div>
-    </article>
+    </li>
   </template>
 
   <!-- Scripts -->

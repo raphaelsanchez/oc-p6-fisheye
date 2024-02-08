@@ -19,7 +19,7 @@
 
 .photographer-card__media {
   width: 200px;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
   border-radius: 100vmax;
   overflow: hidden;
   background-image: var(--background-image);

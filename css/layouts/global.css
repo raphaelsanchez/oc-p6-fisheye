@@ -11,3 +11,9 @@ body {
 body.prevent-scroll {
   overflow: hidden;
 }
+
+.container {
+  width: min(90vw, var(--container-max-width));
+  margin-inline: auto;
+  padding-block: 2.62rem;
+}
