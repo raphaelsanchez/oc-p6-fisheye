@@ -1,18 +1,18 @@
 # FishEye
 
-![GitHub repo size](https://img.shields.io/github/repo-size/raphaelsanchez/oc-p7-les-petits-plats)
-![GitHub top language](https://img.shields.io/github/languages/top/raphaelsanchez/oc-p7-les-petits-plats)
-![GitHub package.json version](https://img.shields.io/github/v/tag/raphaelsanchez/oc-p7-les-petits-plats?label=version&sort=semver)
-![GitHub last commit](https://img.shields.io/github/last-commit/raphaelsanchez/oc-p7-les-petits-plats)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/raphaelsanchez/oc-p7-les-petits-plats/static-deploy.yml)
+![GitHub repo size](https://img.shields.io/github/repo-size/raphaelsanchez/oc-p6-fisheye)
+![GitHub top language](https://img.shields.io/github/languages/top/raphaelsanchez/oc-p6-fisheye)
+![GitHub package.json version](https://img.shields.io/github/v/tag/raphaelsanchez/oc-p6-fisheye?label=version&sort=semver)
+![GitHub last commit](https://img.shields.io/github/last-commit/raphaelsanchez/oc-p6-fisheye)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/raphaelsanchez/oc-p6-fisheye/static.yml)
+
+[Version en ligne](https://raphaelsanchez.github.io/oc-p6-fisheye/) | [Rapport AChecker](https://achecker.ca/checker/index.php?uri=https%3A%2F%2Fraphaelsanchez.github.io%2Foc-p6-fisheye%2F&gid=WCAG2-AA) | [Rapport W3C Validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fraphaelsanchez.github.io%2Foc-p6-fisheye%2F) | [Rapport Lighthouse](https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fraphaelsanchez.github.io%2Foc-p6-fisheye%2F)
+
+![FishEye](./screenshot.png)
 
 ## Table des matières
 
 - [Contexte du projet](#contexte-du-projet)
-  - [L'accessibilité est clé !](#laccessibilité-est-clé-)
-  - [Contraintes techniques additionnelles](#contraintes-techniques-additionnelles)
-  - [Technologies utilisées](#technologies-utilisées)
-  - [Validations du code](#validations-du-code)
 - [Installation](#installation)
 - [Utilisation](#utilisation)
 - [Auteur](#auteur)
@@ -21,8 +21,6 @@
 ## Contexte du projet
 
 Projet fictif réalisé dans le cadre du programme de formation **Développeur Front-end JavaScript React** chez [OpenClassrooms](https://openclassrooms.com) dont le but est de réaliser un site web pour une entreprise de photographes freelances.
-
-![FishEye](./screenshot.png)
 
 ### L'accessibilité est clé !
 
