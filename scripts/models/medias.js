@@ -72,6 +72,9 @@ class ImageMedia {
     mediaCard.querySelector(".media-card__link").setAttribute("href", `${this.src}`)
     mediaCard.querySelector(".media-card__title").textContent = this.title
     mediaCard.querySelector(".media-card__likes .count").textContent = this.likes
+    mediaCard
+      .querySelector(".media-card__likes")
+      .setAttribute("aria-label", `Nombre de likes : ${this.likes}. Cliquez pour ajouter un like.`)
     mediaCard.querySelector(".media-card__image").src = `${this.thumbnail}`
     mediaCard.querySelector(".media-card__image").alt = this.alt
 

@@ -98,15 +98,24 @@ export class Photographer {
     photographerCard.querySelector(".photographer-card__image").src = `${this._IMAGE_PATH}${this.portrait}`
     photographerCard.querySelector(".photographer-card__image").width = this._IMAGE_WIDTH
     photographerCard.querySelector(".photographer-card__image").height = this._IMAGE_HEIGHT
-    photographerCard.querySelector(".photographer-card__image").alt = `Portrait de ${this.name}`
+    photographerCard.querySelector(".photographer-card__image").alt = `Photo de ${this.name}`
     photographerCard.querySelector(".photographer-card__link").href = `./photographer.html?id=${this.id}`
     photographerCard.querySelector(".photographer-card__name").textContent = this.name
+    // Location
     photographerCard.querySelector(".photographer-card__location").textContent = this.location
+    photographerCard
+      .querySelector(".photographer-card__location")
+      .setAttribute("aria-label", `Localisation : ${this.location}.`)
+    // Tagline
     photographerCard.querySelector(".photographer-card__tagline").textContent = this.tagline
+    photographerCard
+      .querySelector(".photographer-card__tagline")
+      .setAttribute("aria-label", `Description : ${this.tagline}.`)
+    // Price
     photographerCard.querySelector(".photographer-card__price").textContent = `${this.price}€/jour`
     photographerCard
       .querySelector(".photographer-card__price")
-      .setAttribute("aria-label", `tarif : ${this.price}€ par jour`)
+      .setAttribute("aria-label", `tarif : ${this.price}€ par jour.`)
 
     const image = photographerCard.querySelector(".photographer-card__image")
     image.addEventListener("load", () => {

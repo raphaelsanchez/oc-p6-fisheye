@@ -292,27 +292,37 @@ const attacheDropdownHandlers = () => {
   dropdownButton.addEventListener("click", () => {
     dropdownList.classList.toggle("visible")
     dropdownButton.classList.toggle("active")
-  })
-
-  // if current item is equal to button textContent, add .hidden to current item
-  dropdownItems.forEach((item) => {
-    if (item.textContent === dropdownButton.textContent) {
-      item.classList.add("hidden")
+    if (dropdownButton.getAttribute("aria-expanded") === "false") {
+      dropdownButton.setAttribute("aria-expanded", "true")
+    } else {
+      dropdownButton.setAttribute("aria-expanded", "false")
     }
   })
 
   // change button textContent to current item textContent and remove .visible from dropdownList
   dropdownItems.forEach((item) => {
-    item.addEventListener("click", (event) => {
-      dropdownButton.textContent = item.textContent
+    const itemButton = item.children[0]
+    if (itemButton.textContent === dropdownButton.textContent) {
+      item.classList.add("hidden")
+    }
+    itemButton.addEventListener("click", (event) => {
+      dropdownButton.textContent = itemButton.textContent
       dropdownList.classList.remove("visible")
       dropdownButton.classList.remove("active")
       // add .hidden to current item and remove .hidden from other items
       dropdownItems.forEach((item) => {
         item.classList.remove("hidden")
       })
-      event.target.classList.add("hidden")
+      item.classList.add("hidden")
     })
+  })
+
+  // close dropdownList when clicking outside
+  window.addEventListener("click", (event) => {
+    if (!event.target.matches(".photographer-medias__dropdown-button")) {
+      dropdownList.classList.remove("visible")
+      dropdownButton.classList.remove("active")
+    }
   })
 }
 
