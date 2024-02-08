@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FishEye</title>
   <meta name="description" content="">
-  <link rel="stylesheet" href="dist/style.css" />
+  <link rel="stylesheet" href="dist/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap"
@@ -20,20 +20,20 @@
 <body>
   <header class="header">
     <a class="header__link" href="./index.html" title="Revenir à l'accueil">
-      <img class="header__logo" src="assets/images/logo.png" width="200" height="50" alt="Logo FishEye" />
+      <img class="header__logo" src="assets/images/logo.png" width="200" height="50" alt="Logo FishEye">
     </a>
   </header>
   <main id="photographer-wrapper">
     <header class="photographer-infos">
       <hgroup class="photographer-infos__header" tabindex="0">
-        <h1 class="photographer-infos__name"></h1>
-        <h2 class="photographer-infos__location"></h2>
-        <p class="photographer-infos__tagline"></p>
+        <h1 class="photographer-infos__name">Name</h1>
+        <p class="photographer-infos__location">Location</p>
+        <p class="photographer-infos__tagline">Tagline</p>
       </hgroup>
       <button class="button photographer-infos__contact" data-target="#contact-form-modal"
         aria-label="Ouvrir le formulaire de contact">Contactez-moi</button>
       <img class="photographer-infos__image" src="https://via.placeholder.com/300" alt="Photo de profil du photographe"
-        tabindex="0" />
+        tabindex="0">
     </header>
 
     <section class="photographer-medias">
@@ -42,17 +42,18 @@
       <div class="photographer-medias__filters">
         <span class="photographer-medias__filters-label" id="filterLabel">Trier par</span>
         <div class="photographer-medias__dropdown">
-          <button class="photographer-medias__dropdown-button" id="filterDropdownButton" role="button"
-            aria-haspopup="listbox" aria-expanded="false" aria-labelledby="filterLabel filterDropdownButton"
+          <button class="photographer-medias__dropdown-button" id="filterDropdownButton" aria-haspopup="listbox"
+            aria-expanded="false" aria-labelledby="filterLabel filterDropdownButton"
             aria-controls="filterList">Popularité</button>
           <ul class="photographer-medias__dropdown-list" id="filterList" role="listbox"
-            aria-activedescendant="filterDropdownButton">
-            <li class="photographer-medias__dropdown-item" data-filter="popularity" role="option" aria-selected="true">
+            aria-activedescendant="popularityOption">
+            <li class="photographer-medias__dropdown-item" data-filter="popularity" id="popularityOption" role="option"
+              aria-selected="true">
               <button aria-label="Trier par popularité">Popularité</button>
             </li>
-            <li class="photographer-medias__dropdown-item" data-filter="date" role="option"><button
+            <li class="photographer-medias__dropdown-item" data-filter="date" id="dateOption" role="option"><button
                 aria-label="Trier par date">Date</button></li>
-            <li class="photographer-medias__dropdown-item" data-filter="title" role="option"><button
+            <li class="photographer-medias__dropdown-item" data-filter="title" id="titleOption" role="option"><button
                 aria-label="Trier par titre">Titre</button></li>
           </ul>
         </div>

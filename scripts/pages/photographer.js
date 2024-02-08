@@ -214,6 +214,9 @@ function attachFilterHandlers(photographerMedias) {
     listItem.addEventListener("click", () => {
       const filterValue = listItem.getAttribute("data-filter")
 
+      // Update aria-activedescendant
+      filterList.setAttribute("aria-activedescendant", listItem.id)
+
       let filteredMedia
       switch (filterValue) {
         case "popularity":
